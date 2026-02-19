@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fetch Paystack Banks</title>
+</head>
+<body>
+  <h1>Paystack Banks Fetcher</h1>
+  <button onclick="fetchBanks()">Fetch Latest Bank Codes</button>
+  <pre id="output"></pre>
+
+  <script>
+    async function fetchBanks() {
+      const output = document.getElementById('output');
+      output.textContent = 'Fetching...';
+
+      try {
+        const res = await fetch('https://api.paystack.co/bank?currency=NGN');
+        const data = await res.json();
+
+        if (data.status && data.data) {
+          output.textContent = JSON.stringify(data.data, null, 2);
+          console.log('Total banks:', data.data.length);
+          console.log('\n\nFormatted for TypeScript:\n');
+          console.log('export const NIGERIAN_BANKS = [');
+          data.data.forEach(bank => {
+            console.log(`  { name: '${bank.name}', code: '${bank.code}' },`);
+          });
+          console.log('];');
+        }
+      } catch (err) {
+        output.textContent = 'Error: ' + err.message;
+      }
+    }
+  </script>
+</body>
+</html>

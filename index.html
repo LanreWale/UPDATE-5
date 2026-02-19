@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" style="background:#0f172a;">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/jpeg" href="/public/Main.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="description" content="THE EMPIRE AFFILIATE MARKETING HUB - Ultimate Multi-Account CPA Management Platform" />
+    <meta name="keywords" content="affiliate marketing, CPA, empire, earnings, dashboard" />
+    <link rel="canonical" href="https://empireaffiliatemarketinghub.com" />
+    <title>THE EMPIRE AFFILIATE MARKETING HUB</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        min-height: 100vh;
+      }
+      #root { min-height: 100vh; }
+    </style>
+    
+    <!-- EMPIRE BANK VALIDATION SECURITY -->
+    <script>
+    (function() {
+        'use strict';
+        console.log('💰 Empire: Activating secure bank validation...');
+        const originalFetch = window.fetch;
+        window.fetch = function(resource, init) {
+            const url = typeof resource === 'string' ? resource : (resource?.url || '');
+            if (url && url.includes('api.paystack.co/bank/resolve')) {
+                console.log('🔒 SECURITY: Intercepting insecure Paystack call');
+                try {
+                    const urlObj = new URL(url);
+                    const account = urlObj.searchParams.get('account_number');
+                    const bank = urlObj.searchParams.get('bank_code');
+                    if (!account || !bank) throw new Error('Missing data');
+                    console.log(`✅ Routing to secure endpoint: ${account} (bank: ${bank})`);
+                    return originalFetch('/api/validate-bank', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json', ...(init?.headers || {})},
+                        body: JSON.stringify({account_number: account, bank_code: bank})
+                    });
+                } catch (error) {
+                    console.error('❌ Failed to intercept:', error);
+                    return Promise.reject(new Error('Bank validation security error'));
+                }
+            }
+            return originalFetch.call(this, resource, init);
+        };
+        window.validateBankAccount = async (account, bank) => {
+            const res = await fetch('/api/validate-bank', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({account_number: account, bank_code: bank})
+            });
+            return await res.json();
+        };
+        console.log('✅ Empire: Bank validation secured');
+        console.log('📌 All Paystack calls routed through /api/validate-bank');
+    })();
+    </script>
+    
+  </head>
+  <body style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#334155 100%);margin:0;padding:0;">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <noscript>
+      <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+        <h1 style="color: #fbbf24;">👑 THE EMPIRE AFFILIATE MARKETING HUB</h1>
+        <p style="color: #64748b;">JavaScript is required to run this application.</p>
+        <p style="color: #64748b;">Please enable JavaScript in your browser settings.</p>
+      </div>
+    </noscript>
+  </body>
+</html>
