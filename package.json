@@ -1,12 +1,13 @@
-"engines": {
-  "node": ">=18"
-}
-
 {
   "name": "the-empire-affiliate-marketing-hub",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+
+  "engines": {
+    "node": ">=18"
+  },
+
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -16,6 +17,7 @@
     "dev:full": "concurrently \"npm run server\" \"wait-on http://localhost:3000 --timeout 15000 && npm run dev\"",
     "dev:all": "concurrently --kill-others \"npm run server\" \"npm run dev\""
   },
+
   "dependencies": {
     "@supabase/supabase-js": "^2.84.0",
     "axios": "^1.6.0",
@@ -31,6 +33,7 @@
     "react-dom": "^18.3.1",
     "stripe": "^20.2.0"
   },
+
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
