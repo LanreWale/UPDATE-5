@@ -2,13 +2,14 @@
 <html lang="en" style="background:#0f172a;">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/jpeg" href="/Main.jpg" />
+    <link rel="icon" type="image/jpeg" href="/main.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0f172a" />
     <meta name="description" content="THE EMPIRE AFFILIATE MARKETING HUB - Ultimate Multi-Account CPA Management Platform" />
     <meta name="keywords" content="affiliate marketing, CPA, empire, earnings, dashboard" />
     <link rel="canonical" href="https://empireaffiliatemarketinghub.com" />
     <title>THE EMPIRE AFFILIATE MARKETING HUB</title>
+
     <style>
       html, body {
         margin: 0;
@@ -16,9 +17,11 @@
         background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
         min-height: 100vh;
       }
-      #root { min-height: 100vh; }
+      #root {
+        min-height: 100vh;
+      }
     </style>
-    
+
     <!-- EMPIRE BANK VALIDATION SECURITY -->
     <script>
     (function() {
@@ -47,6 +50,7 @@
             }
             return originalFetch.call(this, resource, init);
         };
+
         window.validateBankAccount = async (account, bank) => {
             const res = await fetch('/api/validate-bank', {
                 method: 'POST',
@@ -55,15 +59,18 @@
             });
             return await res.json();
         };
+
         console.log('✅ Empire: Bank validation secured');
         console.log('📌 All Paystack calls routed through /api/validate-bank');
     })();
     </script>
-    
   </head>
-  <body style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#334155 100%);margin:0;padding:0;">
+
+  <body>
     <div id="root"></div>
-    <script type="module" src="./main.tsx"></script>
+
+    <script type="module" src="/src/main.tsx"></script>
+
     <noscript>
       <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
         <h1 style="color: #fbbf24;">👑 THE EMPIRE AFFILIATE MARKETING HUB</h1>
